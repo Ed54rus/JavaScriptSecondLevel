@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Burger</title>
+</head>
+
+<body>
+  <form action="#!" id="burger-form" class="form">
+
+    <fieldset>
+      <legend>Собери бургер</legend>
+
+      <fieldset>
+        <legend>Размер бургера</legend>
+
+        <div>
+          <input type="radio" name="size" id="smallburger" value="S"
+            data-price="50" data-calories="20" checked>
+          <label for="smallburger">Маленький</label>
+        </div>
+
+        <div>
+          <input type="radio" name="size" id="bigburger" value="XL"
+            data-price="100" data-calories="40">
+          <label for="bigburger">Большой</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Начинка</legend>
+        <div>
+          <input type="radio" name="add" id="cheeze" value="Cheeze"
+            data-price="10" data-calories="20" checked>
+          <label for="cheeze">С сыром</label>
+        </div>
+        <div>
+          <input type="radio" name="add" id="salad" value="Salad"
+            data-price="20" data-calories="5">
+          <label for="salad">С салатом</label>
+        </div>
+        <div></div>
+        <input type="radio" name="add" id="potato" value="Potato"
+          data-price="15" data-calories="10">
+        <label for="potato">С картофелем</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Дополнительно</legend>
+        <div>
+          <input type="checkbox" name="toping" id="spices" value="Spices"
+            data-price="15" data-calories="0">
+          <label for="spices">Посыпать приправой</label>
+        </div>
+        <div>
+          <input type="checkbox" name="toping" id="saus" value="Saus"
+            data-price="20" data-calories="5">
+          <label for="saus">Полить майонезом</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Нажми на кнопку для расчета цены и каллорий</legend>
+        <p>Каллорий в бургере: <span id="calories"></span></p>
+        <p>Стоимость бургера: <span id="price"></span></p>
+      </fieldset>
+      <button id="makeBurger" class="btn">burger</button>
+    </fieldset>
+  </form>
+  <script src="burger.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>
