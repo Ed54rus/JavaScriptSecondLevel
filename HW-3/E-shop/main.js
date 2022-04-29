@@ -90,42 +90,45 @@ class Basket {
   }
 
   render() {
-    let cartHtml = '';
+    let listHtml = '';
     this.items.forEach(item => {
       const itemBasket = new ItemBasket(item.id_product,
         item.product_name, item.price, item.quantity);
-      cartHtml += itemBasket.render();
+      listHtml += itemBasket.render();
     });
-    document.querySelector('.cart').innerHTML = cartHtml;
+    document.querySelector('.cart').innerHTML = listHtml;
   }
 
 
-  addGood() {
-    document.querySelector('.cart').addEventListener('click', event => {
-      if (!event.target.closest('.add-btn')) {
-        return;
+  addGood(idx) {
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i];
+      if (item['id_product'] === idx) {
+        item['quantity']++;
+        console.log(item);
+        
       }
-      const quan = event.classList('.cart__item-quan');
-      console.log(quan);
-    });
-  }
-  removeGood() {
-    document.querySelector('.cart').addEventListener('click', event => {
-      if (!event.target.closest('.remove-btn')) {
-        return;
-      }
-      document.querySelector('.cart__item-quan').textContent--;
-    });
+    }
   }
 
-  deleteGood() {
-    document.querySelector('.cart').addEventListener('click', event => {
-      if (!event.target.closest('.delete-btn')) {
-        return;
+
+  removeGood(idx) {
+    for (let i = 0; i < this.items.length; i++) {
+      const item = this.items[i];
+      if (item['id_product'] === idx) {
+        if (item['quantity'] > 1) {
+          item['quantity']--;
+          console.log(this.items[i]);
+        } else {
+          console.log('удаляем');
+        }
+
       }
-      document.querySelector('.cart__item').remove();
-      console.log('delete Item');
-    });
+    }
+  }
+
+  deleteItem() {
+    console.log('удаляем');
   }
 }
 
@@ -148,17 +151,31 @@ class ItemBasket {
     <button class="cart__item-btn delete-btn">X</button>
     <img class="cart__item-img" src="${this.img}" alt="Product pic">
     <span class="cart__item-name">${this.title}</span>
-    <span class="cart__item-price">${this.price * this.quantity}</span>
-    <button class="cart__item-btn remove-btn">-</button>
+    <span class="cart__item-price">${this.price}</span>
+    <button class="cart__item-btn remove-btn" data-id="${this.id}">-</button>
     <span class="cart__item-quan">${this.quantity}</span>
-    <button class="cart__item-btn add-btn">+</button>
+    <button class="cart__item-btn add-btn" data-id="${this.id}">+</button>
     </div>`;
-
   }
 }
 const item = new Basket();
 
-item.removeGood()
-item.addGood()
-item.deleteGood()
-// item.render()
+
+const plus = document.querySelector('.cart').addEventListener('click', event => {
+  if (!event.target.classList.contains('add-btn')) {
+    return;
+  }
+  const idx = +event.target.dataset.id;
+ 
+  item.addGood(idx);
+});
+
+const minus = document.addEventListener('click', event => {
+  if (!event.target.classList.contains('remove-btn')) {
+    return;
+  }
+  const idx = +event.target.dataset.id;
+  item.removeGood(idx);
+});
+
+
