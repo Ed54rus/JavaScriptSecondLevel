@@ -101,34 +101,59 @@ class Basket {
 
 
   addGood(idx) {
-    for (let i = 0; i < this.items.length; i++) {
-      const item = this.items[i];
+    let cartItems = document.querySelectorAll('.cart__item');
+    cartItems.forEach(cartItem => {
+      const id = +cartItem.dataset.id;
+      if (id == idx) {
+        const quan = cartItem.querySelector('.cart__item-quan');
+        quan.textContent++;
+      }
+    });
+    this.items.forEach(item => {
       if (item['id_product'] === idx) {
         item['quantity']++;
-        console.log(item);
-        
       }
-    }
+    });
   }
 
 
   removeGood(idx) {
-    for (let i = 0; i < this.items.length; i++) {
-      const item = this.items[i];
-      if (item['id_product'] === idx) {
-        if (item['quantity'] > 1) {
-          item['quantity']--;
-          console.log(this.items[i]);
-        } else {
-          console.log('удаляем');
-        }
-
+    let cartItems = document.querySelectorAll('.cart__item');
+    cartItems.forEach(cartItem => {
+      const id = +cartItem.dataset.id;
+      if (id === idx) {
+        const quan = cartItem.querySelector('.cart__item-quan');
+        quan.textContent--;
       }
-    }
+    });
+    this.items.forEach(item => {
+      if (item['id_product'] === idx) {
+        item['quantity']--;
+        console.log(item);
+      }
+    });
   }
 
-  deleteItem() {
-    console.log('удаляем');
+  deleteItem(idx) {
+
+    let cartItems = document.querySelectorAll('.cart__item');
+
+    this.items.forEach(item => {
+      if (item['id_product'] === idx) {
+        const itemIdx = this.items.indexOf(item);
+        if (itemIdx > -1) {
+          console.log(123);
+        }
+      }
+    });
+    cartItems.forEach(cartItem => {
+      const id = +cartItem.dataset.id;
+      if (id === idx) {
+        cartItem.remove();
+        console.log(item);
+      }
+    });
+
   }
 }
 
@@ -148,7 +173,7 @@ class ItemBasket {
   render() {
 
     return `<div class="cart__item" data-id="${this.id}">
-    <button class="cart__item-btn delete-btn">X</button>
+    <button class="cart__item-btn delete-btn" data-id="${this.id}">X</button>
     <img class="cart__item-img" src="${this.img}" alt="Product pic">
     <span class="cart__item-name">${this.title}</span>
     <span class="cart__item-price">${this.price}</span>
@@ -161,21 +186,31 @@ class ItemBasket {
 const item = new Basket();
 
 
-const plus = document.querySelector('.cart').addEventListener('click', event => {
-  if (!event.target.classList.contains('add-btn')) {
-    return;
-  }
-  const idx = +event.target.dataset.id;
- 
-  item.addGood(idx);
-});
 
-const minus = document.addEventListener('click', event => {
-  if (!event.target.classList.contains('remove-btn')) {
-    return;
-  }
-  const idx = +event.target.dataset.id;
-  item.removeGood(idx);
-});
+const addBtn = document.querySelector('.cart')
+  .addEventListener('click', event => {
+    if (!event.target.classList.contains('add-btn')) {
+      return;
+    }
+    const idx = +event.target.dataset.id;
+    item.addGood(idx);
+  });
 
+const removeBtn = document.querySelector('.cart')
+  .addEventListener('click', event => {
+    if (!event.target.classList.contains('remove-btn')) {
+      return;
+    }
+    const idx = +event.target.dataset.id;
+    item.removeGood(idx);
+  });
+
+const deleteBtn = document.querySelector('.cart')
+  .addEventListener('click', event => {
+    if (!event.target.classList.contains('delete-btn')) {
+      return;
+    }
+    const idx = +event.target.dataset.id;
+    item.deleteItem(idx);
+  });
 
