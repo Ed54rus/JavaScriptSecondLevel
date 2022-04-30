@@ -63,11 +63,6 @@ class GoodsList {
 
 const list = new GoodsList();
 
-// list.fetchGoods();
-// list.render();
-// list.getSum();
-
-
 class Basket {
 
   constructor(container = '.cart') {
@@ -99,7 +94,6 @@ class Basket {
     document.querySelector('.cart').innerHTML = listHtml;
   }
 
-
   addGood(idx) {
     let cartItems = document.querySelectorAll('.cart__item');
     cartItems.forEach(cartItem => {
@@ -112,6 +106,7 @@ class Basket {
     this.items.forEach(item => {
       if (item['id_product'] === idx) {
         item['quantity']++;
+        console.log(item);
       }
     });
   }
@@ -128,21 +123,35 @@ class Basket {
     });
     this.items.forEach(item => {
       if (item['id_product'] === idx) {
-        item['quantity']--;
-        console.log(item);
+        if (item['quantity'] === 1) {
+          item['quantity']--;
+          const itemIdx = this.items.indexOf(item);
+          if (itemIdx > -1) {
+            this.items.splice(itemIdx, 1);
+            console.log(this.items);
+          }
+          cartItems.forEach(cartItem => {
+            const id = +cartItem.dataset.id;
+            if (id === idx) {
+              cartItem.remove();
+            }
+          });
+        } else {
+          item['quantity']--;
+        }
       }
+      console.log(item);
     });
   }
 
   deleteItem(idx) {
-
     let cartItems = document.querySelectorAll('.cart__item');
-
     this.items.forEach(item => {
       if (item['id_product'] === idx) {
         const itemIdx = this.items.indexOf(item);
         if (itemIdx > -1) {
-          console.log(123);
+          this.items.splice(itemIdx, 1);
+          console.log(this.items);
         }
       }
     });
@@ -150,14 +159,10 @@ class Basket {
       const id = +cartItem.dataset.id;
       if (id === idx) {
         cartItem.remove();
-        console.log(item);
       }
     });
-
   }
 }
-
-
 
 class ItemBasket {
   constructor(id, title, price, quantity,
@@ -186,31 +191,28 @@ class ItemBasket {
 const item = new Basket();
 
 
+const addBtn = cart.addEventListener('click', event => {
+  if (!event.target.classList.contains('add-btn')) {
+    return;
+  }
+  const idx = +event.target.dataset.id;
+  item.addGood(idx);
+});
 
-const addBtn = document.querySelector('.cart')
-  .addEventListener('click', event => {
-    if (!event.target.classList.contains('add-btn')) {
-      return;
-    }
-    const idx = +event.target.dataset.id;
-    item.addGood(idx);
-  });
+const removeBtn = cart.addEventListener('click', event => {
+  if (!event.target.classList.contains('remove-btn')) {
+    return;
+  }
+  const idx = +event.target.dataset.id;
+  item.removeGood(idx);
+});
 
-const removeBtn = document.querySelector('.cart')
-  .addEventListener('click', event => {
-    if (!event.target.classList.contains('remove-btn')) {
-      return;
-    }
-    const idx = +event.target.dataset.id;
-    item.removeGood(idx);
-  });
+const deleteBtn = cart.addEventListener('click', event => {
+  if (!event.target.classList.contains('delete-btn')) {
+    return;
+  }
+  const idx = +event.target.dataset.id;
+  item.deleteItem(idx);
+});
 
-const deleteBtn = document.querySelector('.cart')
-  .addEventListener('click', event => {
-    if (!event.target.classList.contains('delete-btn')) {
-      return;
-    }
-    const idx = +event.target.dataset.id;
-    item.deleteItem(idx);
-  });
 
