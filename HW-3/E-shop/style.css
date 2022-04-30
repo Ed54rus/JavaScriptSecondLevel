@@ -124,7 +124,7 @@ body {
   right: 0;
   background: #fff;
   box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-  max-width: 600px;
+  max-width: 700px;
   width: 100%;
   margin: 0 auto;
   border-radius: 12px;
@@ -165,6 +165,14 @@ body {
   max-width: 80px;
   width: 100%;
   font-size: 14px;
+  color: #43484D;
+  font-weight: 600;
+}
+
+.cart__item_total-price{
+  max-width: 80px;
+  width: 100%;
+  font-size: 16px;
   color: #43484D;
   font-weight: 600;
 }

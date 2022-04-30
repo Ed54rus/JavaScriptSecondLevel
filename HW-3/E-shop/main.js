@@ -95,53 +95,24 @@ class Basket {
   }
 
   addGood(idx) {
-    let cartItems = document.querySelectorAll('.cart__item');
-    cartItems.forEach(cartItem => {
-      const id = +cartItem.dataset.id;
-      if (id == idx) {
-        const quan = cartItem.querySelector('.cart__item-quan');
-        quan.textContent++;
-      }
-    });
     this.items.forEach(item => {
       if (item['id_product'] === idx) {
         item['quantity']++;
         console.log(item);
       }
     });
+    this.render()
   }
-
 
   removeGood(idx) {
     let cartItems = document.querySelectorAll('.cart__item');
-    cartItems.forEach(cartItem => {
-      const id = +cartItem.dataset.id;
-      if (id === idx) {
-        const quan = cartItem.querySelector('.cart__item-quan');
-        quan.textContent--;
-      }
-    });
     this.items.forEach(item => {
       if (item['id_product'] === idx) {
-        if (item['quantity'] === 1) {
-          item['quantity']--;
-          const itemIdx = this.items.indexOf(item);
-          if (itemIdx > -1) {
-            this.items.splice(itemIdx, 1);
-            console.log(this.items);
-          }
-          cartItems.forEach(cartItem => {
-            const id = +cartItem.dataset.id;
-            if (id === idx) {
-              cartItem.remove();
-            }
-          });
-        } else {
-          item['quantity']--;
-        }
+        (item['quantity'] === 1) ? this.deleteItem(idx) : item['quantity']--;
       }
       console.log(item);
     });
+    this.render()
   }
 
   deleteItem(idx) {
@@ -185,6 +156,7 @@ class ItemBasket {
     <button class="cart__item-btn remove-btn" data-id="${this.id}">-</button>
     <span class="cart__item-quan">${this.quantity}</span>
     <button class="cart__item-btn add-btn" data-id="${this.id}">+</button>
+    <span class="cart__item_total-price">${this.quantity * this.price}</span>
     </div>`;
   }
 }
