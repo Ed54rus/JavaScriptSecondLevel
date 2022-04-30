@@ -2,6 +2,7 @@
 
 const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses'
 const cart = document.querySelector('.cart');
+const goodList = document.querySelector('.goods-list');
 const cartBtn = document.querySelector('.cart-button')
   .addEventListener('click', () => {
     cart.classList.toggle('active');
@@ -21,7 +22,7 @@ class GoodsItem {
     <img class="item-img" src="${this.img}" alt="Product pic">
     <h3 class="item-title">${this.title}</h3>
     <p class="item-price">${this.price}</p>
-    <button class="item-btn">Добавить</button></div>`;
+    <button class="item-btn" data-id="${this.id}">Добавить</button></div>`;
   }
 }
 
@@ -95,9 +96,11 @@ class Basket {
   }
 
   addGood(idx) {
+    
     this.items.forEach(item => {
       if (item['id_product'] === idx) {
         item['quantity']++;
+        // this.items += item
         console.log(item);
       }
     });
@@ -165,6 +168,14 @@ const item = new Basket();
 
 const addBtn = cart.addEventListener('click', event => {
   if (!event.target.classList.contains('add-btn')) {
+    return;
+  }
+  const idx = +event.target.dataset.id;
+  item.addGood(idx);
+});
+
+const ItemAddBtn = goodList.addEventListener('click', event => {
+  if (!event.target.classList.contains('item-btn')) {
     return;
   }
   const idx = +event.target.dataset.id;
