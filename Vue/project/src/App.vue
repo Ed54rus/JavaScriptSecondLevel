@@ -1,20 +1,18 @@
 <template>
-	<div>
-		<form>
-			<h4>Создание поста</h4>
-			<input class="input" type="text" placeholder="Название" />
-			<input class="input" type="text" placeholder="Описание" />
-			<button>Создать</button>
-		</form>
-		<div class="post" v-for="post in posts">
-			<div><strong>Название:</strong>{{ post.title }}</div>
-			<div><strong>Название:</strong>{{ post.body }}</div>
-		</div>
+	<div class="app">
+		<post-form @create="createPost" />
+		<post-list :posts="posts" />
 	</div>
 </template>
 
 <script>
+import PostForm from '@/components/PostForm';
+import PostList from '@/components/PostList';
 export default {
+	components: {
+		PostList,
+		PostForm,
+	},
 	data() {
 		return {
 			posts: [
@@ -26,11 +24,8 @@ export default {
 		};
 	},
 	methods: {
-		addLike() {
-			this.likes += 1;
-		},
-		addDislike() {
-			this.dislikes += 1;
+		createPost(post) {
+			this.posts.push(post);
 		},
 	},
 };
@@ -42,13 +37,8 @@ export default {
 	padding: 0;
 	box-sizing: border-box;
 }
-.post {
-	padding: 15px;
-	border: 2px solid teal;
-	margin-top: 15px;
-}
-.input {
-	width: 100%;
-	border: 1px solid teal;
+
+.app {
+	padding: 20px;
 }
 </style>
