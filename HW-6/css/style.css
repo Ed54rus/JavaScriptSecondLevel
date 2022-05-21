@@ -209,3 +209,10 @@ img {
 	border: none;
 	border-bottom: 2px solid #fafafa;
 }
+
+.error{
+	padding: 50px;
+	color: red;
+	display: flex;
+	justify-content: center;
+}

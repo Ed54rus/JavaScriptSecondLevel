@@ -33,7 +33,6 @@ const products = {
 				this.products.push(el);
 				this.filtered.push(el);
 			}
-			// console.log(this.filtered)
 		});
 	},
 	methods: {
