@@ -15,50 +15,25 @@
 		<header>
 			<div class="logo">E-shop</div>
 			<div class="cart">
-				<form class="search-form" action="#" @submit.prevent="filter">
-					<input class="search-field" type="text" v-model="userSearch">
-					<button class="btn-search" type="submit">
-						<i class="fas fa-search"></i>
-					</button>
-				</form>
-				<button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
-				<div class="cart-block" v-show="showCart">
-					<p v-if="!cartItems.length">Корзина пуста!</p>
-					<div class="cart-item" v-for="item of cartItems" :key="item.id_product">
-						<div class="product-bio">
-							<img :src="imgCart" alt="Product picture">
-							<div class="product-desc">
-								<div class="product-title">{{item.product_name}}</div>
-								<div class="product-quantity">Количество: {{item.quantity}}</div>
-								<div class="product-single-price">{{item.price}} руб. за шт.</div>
-							</div>
-						</div>
-						<div class="right-block">
-							<div class="product-price">{{item.quantity*item.price}}</div>
-							<div class="del-btn" @click="remove(item)">x</div>
-						</div>
-					</div>
-				</div>
+				<filter_el></filter_el>
+
+				<cart ref="cart"></cart>
 			</div>
 		</header>
 
 		<main>
-			<div class="products">
-				<div class="product-item" v-for='product of filtered' :key="product.id_product">
-					<img :src="imgProduct" alt="Product picture">
-					<div class="desc">
-						<h3>{{product.product_name}}</h3>
-						<p>{{product.price}}</p>
-						<button class="buy-btn" @click='addProduct(product)'>Купить</button>
-					</div>
-				</div>
-			</div>
+			<products ref="products"></products>
 		</main>
+
 	</div>
+
 	<script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
 		integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
 		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="js/CartComp.js"></script>
+	<script src="js/ProdComp.js"></script>
+	<script src="js/FilterComp.js"></script>
 	<script src="js/main.js"></script>
 </body>
 
