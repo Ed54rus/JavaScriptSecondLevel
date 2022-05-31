@@ -1,0 +1,26 @@
+[
+  {
+    "id_product": 124,
+    "product_name": "Apple Watch",
+    "price": 27000,
+    "img": "https://avatars.mds.yandex.net/i?id=a1a0a2c1d6225b49857fc6969b109080-5280620-images-thumbs&n=13"
+  },
+  {
+    "id_product": 457,
+    "product_name": "Macbook air 13",
+    "price": 99000,
+    "img": "https://avatars.mds.yandex.net/i?id=e316a8507dd242db080cc92787ce0b91-5236263-images-thumbs&n=13"
+  },
+  {
+    "id_product": 123,
+    "product_name": "Iphone X",
+    "price": 35000,
+    "img": "https://avatars.mds.yandex.net/i?id=874378d22e86af47a2e36f06add797d3-7053604-images-thumbs&n=13"
+  },
+  {
+    "id_product": 456,
+    "product_name": "AirPods Pro",
+    "price": 1000,
+    "img": "https://avatars.mds.yandex.net/i?id=63ace49f45c84203c615176bb72c4fd3-5889045-images-thumbs&n=13"
+  }
+]
