@@ -1,0 +1,20 @@
+{
+    "amount": 0,
+    "countGoods": 0,
+    "contents": [
+        {
+            "quantity": 1,
+            "id_product": 456,
+            "product_name": "AirPods Pro",
+            "price": 1000,
+            "img": "https://avatars.mds.yandex.net/i?id=63ace49f45c84203c615176bb72c4fd3-5889045-images-thumbs&n=13"
+        },
+        {
+            "quantity": 1,
+            "id_product": 123,
+            "product_name": "Iphone X",
+            "price": 35000,
+            "img": "https://avatars.mds.yandex.net/i?id=874378d22e86af47a2e36f06add797d3-7053604-images-thumbs&n=13"
+        }
+    ]
+}
